@@ -18,10 +18,11 @@ type ServerConfig struct {
 }
 
 type AWSConfig struct {
-	AccessKey string `json:"access_key"`
-	SecretKey string `json:"secret_key"`
-	Endpoint  string `json:"endpoint"`
-	Region    string `json:"region"`
+	AccessKey     string `json:"access_key"`
+	SecretKey     string `json:"secret_key"`
+	Endpoint      string `json:"endpoint"`
+	Region        string `json:"region"`
+	DynamoDBTable string `json:"dynamodb_table"`
 }
 
 func LoadConfig() (Config, error) {

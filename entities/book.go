@@ -33,6 +33,7 @@ type GetBookResponse struct {
 }
 
 func (b AddBookResponse) Render(w http.ResponseWriter, r *http.Request) error {
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	return nil
 }

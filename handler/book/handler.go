@@ -1,26 +1,29 @@
 package book
 
 import (
+	"net/http"
+	"time"
+
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
-	"net/http"
+
 	"rest-with-dynamodb/entities"
 	"rest-with-dynamodb/internal"
 	"rest-with-dynamodb/usecases/book"
-	"time"
 )
 
+// AddBookHandler Insert Books to DynamoDB
 func AddBookHandler(w http.ResponseWriter, r *http.Request) {
 
 	data := &entities.AddBookRequest{}
+	//convert request body to the entity
 	if err := render.Bind(r, data); err != nil {
 		render.Render(w, r, internal.ErrBadRequest)
 		return
 	}
 
 	bookUseCase := book.NewUseCase()
-
-	//validate request
+	//create book item to insert to db
 	bookItem := entities.BookItem{
 		ISBNNumber:       data.ISBNNumber,
 		SortKey:          "unique_sort", //this is to keep isbn unique
@@ -37,6 +40,7 @@ func AddBookHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//success response
 	resp := entities.AddBookResponse{
 		Status:  "Success",
 		Message: "Created",
@@ -45,6 +49,7 @@ func AddBookHandler(w http.ResponseWriter, r *http.Request) {
 	render.Render(w, r, resp)
 }
 
+// GetBookHandler GET Books from DynamoDB by ISBN
 func GetBookHandler(w http.ResponseWriter, r *http.Request) {
 
 	isbn := chi.URLParam(r, "isbn")

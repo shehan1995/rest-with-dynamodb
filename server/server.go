@@ -3,15 +3,17 @@ package server
 import (
 	"context"
 	"fmt"
-	"github.com/go-chi/chi/v5"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
-	"rest-with-dynamodb/config"
-	"rest-with-dynamodb/repositories/dynamodb"
 	"syscall"
 	"time"
+
+	"github.com/go-chi/chi/v5"
+
+	"rest-with-dynamodb/config"
+	"rest-with-dynamodb/repositories/dynamodb"
 )
 
 type Server struct {
