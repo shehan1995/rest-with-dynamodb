@@ -5,10 +5,6 @@
 *.prof
 *.out
 
-# Dependency directories (remove the comment if you're using modules)
- /vendor/
-
-# IDE files (if using a specific IDE, add its files here)
 .idea/
 
 /config/config_sample.json
@@ -16,3 +12,4 @@
 # System files
 .DS_Store
 Thumbs.db
+/vendor/
