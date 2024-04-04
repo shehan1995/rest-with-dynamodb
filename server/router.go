@@ -18,7 +18,7 @@ func (s *Server) httpRouter() {
 
 	s.router.Get("/health", health.Handler)
 	s.router.Route("/api/book", func(r chi.Router) {
-		r.Put("/", book.AddBookHandler)
+		r.Post("/", book.AddBookHandler)
 		r.Route("/{isbn}", func(r chi.Router) {
 			r.Get("/", book.GetBookHandler)
 		})

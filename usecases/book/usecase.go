@@ -16,6 +16,7 @@ func NewUseCase() *Usecase {
 	return &Usecase{DynamoDBRepo: dynamodb.DynamoDBRepo}
 }
 
+// AddBook use case
 func (u *Usecase) AddBook(ctx context.Context, bookItem entities.BookItem) error {
 	err := u.DynamoDBRepo.AddItem(ctx, bookItem)
 	if err != nil {
@@ -24,6 +25,7 @@ func (u *Usecase) AddBook(ctx context.Context, bookItem entities.BookItem) error
 	return nil
 }
 
+// GetBook use case
 func (u *Usecase) GetBook(ctx context.Context, isbn string) (book entities.BookItem, err error) {
 
 	err = u.DynamoDBRepo.QueryItem(ctx, isbn, &book)

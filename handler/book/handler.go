@@ -22,6 +22,11 @@ func AddBookHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//validate mandatory field
+	if data.ISBNNumber == "" {
+		render.Render(w, r, internal.ErrBadRequest)
+		return
+	}
 	bookUseCase := book.NewUseCase()
 	//create book item to insert to db
 	bookItem := entities.BookItem{
@@ -43,7 +48,7 @@ func AddBookHandler(w http.ResponseWriter, r *http.Request) {
 	//success response
 	resp := entities.AddBookResponse{
 		Status:  "Success",
-		Message: "Created",
+		Message: "Book Record Inserted",
 	}
 
 	render.Render(w, r, resp)
